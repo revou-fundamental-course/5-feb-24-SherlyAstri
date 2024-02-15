@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>KONVERSI SUHU</h1>
+        <hr>
+        <p>
+            Masukkan Suhu derajat di kotak temperature nanti akan terkonversi secara otomatis, lalu klik reset jika ingin mengulang 
+        </p>
+        <body>
+            <form oninput="convertTemperature()">
+                <fieldset>
+                    <legend>Temperature Converter</legend>
+                    <label for="inputTemperature">Temperature:</label>
+                    <input type="number" id="inputTemperature" value="0">
+                    <input type="reset" value="Reset">
+                   <p> <label for="inputScale">Convert from scale:</label>
+                              
+                    <select id="inputScale">
+                        <option value="C">Celsius</option>
+                        <option value="F">Fahrenheit</option>
+                    </select>
+                   </p>
+                    <label for="outputScale">Convert to scale:</label>
+                    <select id="outputScale">
+                        <option value="F">Fahrenheit</option>
+                        <option value="C">Celsius</option>
+                    </select>
+                </fieldset>
+                <div id="output"></div>
+            </form>
+            <script>
+                function convertTemperature() {
+                    const inputTemp = parseFloat(document.getElementById("inputTemperature").value);
+                    const inputScale = document.getElementById("inputScale").value;
+                    const outputScale = document.getElementById("outputScale").value;
+        
+                    let convertedTemp = 0;
+        
+                    if (inputScale === "C") {
+                        if (outputScale === "C") {
+                            convertedTemp = inputTemp;
+                        } else if (outputScale === "F") {
+                            convertedTemp = (inputTemp * 9/5) + 32;
+                        }
+                    } else if (inputScale === "F") {
+                        if (outputScale === "C") {
+                            convertedTemp = (inputTemp - 32) * 5/9;
+                        } else if (outputScale === "F") {
+                            convertedTemp = inputTemp;
+                        }
+                    }
+        
+                    document.getElementById("output").innerText = `Converted Temperature: ${convertedTemp} ${outputScale}`;
+                }
+            </script>
+        </body>
+    </div>
+</body>
+</html>
